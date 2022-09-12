@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" href="css/prototype-elem.css">
+        <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <style>
+            .full_screen{
+                z-index: 10;
+                position: fixed;
+                top: 0;
+                width: 100%;
+                left: 0;
+                height: 100%;
+                background-color: rgba(0,0,0,.5);
+                justify-content: center;
+                align-items: center;
+                display: none;
+            }
+            .check_console{
+                position: relative;
+                width: 300px;
+                height: 150px;
+                background-color: #fff;
+                }
+                .check_console .l{
+                    padding: 15px;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                }
+                .check_console .l button{
+                    padding: 10px;
+                    margin: 10px;
+                }
+            </style>
+    </head>
+    <body>
+        <div class="navigate">
+            <div class="logo">
+                <a href="#"><img src="https://picsum.photos/80/40/?random=1"></a>
+            </div>
+            <div class="login">
+                <div id="stu_id"></div>
+            </div>
+        </div>
+        <div class="info">
+            <div class="banner"><img src="source/banner.png"></div>
+            <div class="warp">
+                <div class="text">
+                    <h2>遊戲玩法</h2>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Id rerum hic voluptatum accusamus quod vitae minima est laboriosam sunt repellendus, amet facere ducimus voluptas, placeat odit, ullam quae fugiat quaerat.</p>
+                </div>
+                <div class="vid"><video src="source/video.mp4" controls></video></div>
+            </div>
+        </div>
+        <div class="game">
+            <div class="warp" id="gt"><h3 id="money"></h3></div>
+            <div class="warp">
+                <div class="row">
+                    <div class="table"> <!--總數-->
+                        <div class="table-row">
+                            <div class="t-item ttl"></div>
+                            <div class="t-item ttt" id="tt">總數</div>
+                            <div class="t-item ttr"></div>
+                        </div>
+                        <div class="table-row lb">
+                            <div class="item"></div>
+                            <div class="item">A</div>
+                            <div class="item">B</div>
+                            <div class="item">C</div>
+                            <div class="item tr">合計</div>
+                        </div>
+                        <div class="table-row">
+                            <div class="item lb">超市</div>
+                            <div class="item or"></div>
+                            <div class="item or"></div>
+                            <div class="item or"></div>
+                            <div class="item tr ye"><button class = "buy ye" id="A-1-4" name="200">200</button></div>
+                        </div>
+                        <div class="table-row">
+                            <div class="item lb">便利商店</div>
+                            <div class="item or"></div>
+                            <div class="item or"></div>
+                            <div class="item or"></div>
+                            <div class="item tr ye"><button class = "buy ye" id="A-2-4" name="200">200</button></div>
+                        </div>
+                        <div class="table-row">
+                            <div class="item lb">量販店</div>
+                            <div class="item or"></div>
+                            <div class="item or"></div>
+                            <div class="item or"></div>
+                            <div class="item tr ye"><button class = "buy ye" id="A-3-4" name="200">200</button></div>
+                        </div>
+                        <div class="table-row">
+                            <div class="item tbl tb lb">合計</div>
+                            <div class="item tb ye"><button class = "buy ye" id="A-4-1" name="200">200</button></div>
+                            <div class="item tb ye"><button class = "buy ye" id="A-4-2" name="200">200</button></div>
+                            <div class="item tb ye"><button class = "buy ye" id="A-4-3" name="200">200</button></div>
+                            <div class="item tb tr tbr gr"><button class = "buy gr" id="A-4-4" name="500">500</button></div>
+                        </div>
+                    </div>
+                    <div class="table"> <!--總計百分比-->
+                        <div class="table-row">
+                            <div class="t-item ttl"></div>
+                            <div class="t-item ttt" id="tt">統計百分比</div>
+                            <div class="t-item ttr"></div>
+                        </div>
+                        <div class="table-row lb">
+                            <div class="item"></div>
+                            <div class="item">A</div>
+                            <div class="item">B</div>
+                            <div class="item">C</div>
+                            <div class="item tr">合計</div>
+                        </div>
+                        <div class="table-row">
+                            <div class="item lb">超市</div>
+                            <div class="item or"><button class = "buy or" id="B-1-1" name="100">100</button></div>
+                            <div class="item or"><button class = "buy or" id="B-1-2" name="100">100</button></div>
+                            <div class="item or"><button class = "buy or" id="B-1-3" name="100">100</button></div>
+                            <div class="item tr ye"><button class = "buy ye" id="B-1-4" name="150">150</button></div>
+                        </div>
+                        <div class="table-row">
+                            <div class="item lb">便利商店</div>
+                            <div class="item or"><button class = "buy or" id="B-2-1" name="100">100</button></div>
+                            <div class="item or"><button class = "buy or" id="B-2-2" name="100">100</button></div>
+                            <div class="item or"><button class = "buy or" id="B-2-3" name="100">100</button></div>
+                            <div class="item tr ye"><button class = "buy ye" id="B-2-4" name="150">150</button></div>
+                        </div>
+                        <div class="table-row">
+                            <div class="item lb">量販店</div>
+                            <div class="item or"><button class = "buy or" id="B-3-1" name="100">100</button></div>
+                            <div class="item or"><button class = "buy or" id="B-3-2" name="100">100</button></div>
+                            <div class="item or"><button class = "buy or" id="B-3-3" name="100">100</button></div>
+                            <div class="item tr ye"><button class = "buy ye" id="B-3-4" name="150">150</button></div>
+                        </div>
+                        <div class="table-row">
+                            <div class="item tbl tb lb">合計</div>
+                            <div class="item tb ye"><button class = "buy ye" id="B-4-1" name="150">150</button></div>
+                            <div class="item tb ye"><button class = "buy ye" id="B-4-2" name="150">150</button></div>
+                            <div class="item tb ye"><button class = "buy ye" id="B-4-3" name="150">150</button></div>
+                            <div class="item tr tb tbr gr">100%</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="table"> <!--列百分比-->
+                        <div class="table-row">
+                            <div class="t-item ttl"></div>
+                            <div class="t-item ttt" id="tt">列百分比</div>
+                            <div class="t-item ttr"></div>
+                        </div>
+                        <div class="table-row lb">
+                            <div class="item"></div>
+                            <div class="item">A</div>
+                            <div class="item">B</div>
+                            <div class="item">C</div>
+                            <div class="item tr">合計</div>
+                        </div>
+                        <div class="table-row">
+                            <div class="item lb">超市</div>
+                            <div class="item or"><button class = "buy or" id="C-1-1" name="100">100</button></div>
+                            <div class="item or"><button class = "buy or" id="C-1-2" name="100">100</button></div>
+                            <div class="item or"><button class = "buy or" id="C-1-3" name="100">100</button></div>
+                            <div class="item tr ye">100%</div>
+                        </div>
+                        <div class="table-row">
+                            <div class="item lb">便利商店</div>
+                            <div class="item or"><button class = "buy or" id="C-2-1" name="100">100</button></div>
+                            <div class="item or"><button class = "buy or" id="C-2-2" name="100">100</button></div>
+                            <div class="item or"><button class = "buy or" id="C-2-3" name="100">100</button></div>
+                            <div class="item tr ye">100%</div>
+                        </div>
+                        <div class="table-row">
+                            <div class="item lb">量販店</div>
+                            <div class="item or"><button class = "buy or" id="C-3-1" name="100">100</button></div>
+                            <div class="item or"><button class = "buy or" id="C-3-2" name="100">100</button></div>
+                            <div class="item or"><button class = "buy or" id="C-3-3" name="100">100</button></div>
+                            <div class="item tr ye">100%</div>
+                        </div>
+                        <div class="table-row">
+                            <div class="item tbl tb lb">N/A</div>
+                            <div class="item tb ye">N/A</div>
+                            <div class="item tb ye">N/A</div>
+                            <div class="item tb ye">N/A</div>
+                            <div class="item tr tbr tb gr">N/A</div>
+                        </div>
+                    </div>
+                    <div class="table"> <!--欄百分比-->
+                        <div class="table-row">
+                            <div class="t-item ttl"></div>
+                            <div class="t-item ttt" id="tt">欄百分比</div>
+                            <div class="t-item ttr"></div>
+                        </div>
+                        <div class="table-row lb">
+                            <div class="item"></div>
+                            <div class="item">A</div>
+                            <div class="item">B</div>
+                            <div class="item">C</div>
+                            <div class="item tr"></div>
+                        </div>
+                        <div class="table-row">
+                            <div class="item lb">超市</div>
+                            <div class="item or"><button class = "buy or" id="D-1-1" name="100">100</button></div>
+                            <div class="item or"><button class = "buy or" id="D-1-2" name="100">100</button></div>
+                            <div class="item or"><button class = "buy or" id="D-1-3" name="100">100</button></div>
+                            <div class="item tr ye">N/A</div>
+                        </div>
+                        <div class="table-row">
+                            <div class="item lb">便利商店</div>
+                            <div class="item or"><button class = "buy or" id="D-2-1">100</button></div>
+                            <div class="item or"><button class = "buy or" id="D-2-2">100</button></div>
+                            <div class="item or"><button class = "buy or" id="D-2-3">100</button></div>
+                            <div class="item tr ye">N/A</div>
+                        </div>
+                        <div class="table-row">
+                            <div class="item lb">量販店</div>
+                            <div class="item or"><button class = "buy or" id="D-3-1">100</button></div>
+                            <div class="item or"><button class = "buy or" id="D-3-2">100</button></div>
+                            <div class="item or"><button class = "buy or" id="D-3-3">100</button></div>
+                            <div class="item tr ye">N/A</div>
+                        </div>
+                        <div class="table-row">
+                            <div class="item tbl tb lb">合計</div>
+                            <div class="item tb ye">100%</div>
+                            <div class="item tb ye">100%</div>
+                            <div class="item tb ye">100%</div>
+                            <div class="item tbr tr tb gr">N/A</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row" id="ans">
+                    <div class="table"> <!--總數-->
+                        <div class="table-row">
+                            <div class="t-item ttl"></div>
+                            <div class="t-item ttt" id="tt">總數</div>
+                            <div class="t-item ttr"></div>
+                        </div>
+                        <div class="table-row lb">
+                            <div class="item"></div>
+                            <div class="item">A</div>
+                            <div class="item">B</div>
+                            <div class="item">C</div>
+                            <div class="item tr">合計</div>
+                        </div>
+                        <div class="table-row">
+                            <div class="item lb">超市</div>
+                            <div class="item or"><input type="text" class="input-bar or" id="1" placeholder="answer"></div>
+                            <div class="item or"><input type="text" class="input-bar or" id="2" placeholder="answer"></div>
+                            <div class="item or"><input type="text" class="input-bar or" id="3" placeholder="answer"></div>
+                            <div class="item tr ye"><input type="text" class="input-bar ye" id="4" placeholder="answer"></div>
+                        </div>
+                        <div class="table-row">
+                            <div class="item lb">便利商店</div>
+                            <div class="item or"><input type="text" class="input-bar or" id="5" placeholder="answer"></div>
+                            <div class="item or"><input type="text" class="input-bar or" id="6" placeholder="answer"></div>
+                            <div class="item or"><input type="text" class="input-bar or" id="7" placeholder="answer"></div>
+                            <div class="item tr ye"><input type="text" class="input-bar ye" id="8" placeholder="answer"></div>
+                        </div>
+                        <div class="table-row">
+                            <div class="item lb">量販店</div>
+                            <div class="item or"><input type="text" class="input-bar or" id="9" placeholder="answer"></div>
+                            <div class="item or"><input type="text" class="input-bar or" id="10" placeholder="answer"></div>
+                            <div class="item or"><input type="text" class="input-bar or" id="11" placeholder="answer"></div>
+                            <div class="item tr ye"><input type="text" class="input-bar ye" id="12" placeholder="answer"></div>
+                        </div>
+                        <div class="table-row">
+                            <div class="item tbl tb lb">合計</div>
+                            <div class="item tb ye"><input type="text" class="input-bar ye" id="13" placeholder="answer"></div>
+                            <div class="item tb ye"><input type="text" class="input-bar ye" id="14" placeholder="answer"></div>
+                            <div class="item tb ye"><input type="text" class="input-bar ye" id="15" placeholder="answer"></div>
+                            <div class="item tb tr tbr gr"><input type="text" class="input-bar gr" id="16" placeholder="answer"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row" id="s"><div class="submit"><button id="submit-btn">submit the answer</button></div></div>
+                <div id="result"></div>
+            </div>
+        </div>
+        <div id="full_screen_c" class="full_screen">
+            <div class="check_console">
+                <div class="l"><h1>確定要購買??</h1></div>
+                <div class="l"><button id="accept_buy">確定</button><button id="refuse">取消</button></div>
+            </div>
+        </div>
+    <script src="js/jquery.min.js"></script>        
+    <script>
+
+        $(document).ready(function(){
+            var money = 1500;
+            var seq = []
+            const initial_time = new Date().getTime();
+            var game_completed = 'false';
+            $("#money").html(money);            
+            $("#submit-btn").click(function(){
+                a1 = $("#1").val();
+                a2 = $("#2").val();
+                a3 = $("#3").val();
+                a4 = $("#4").val();
+                a5 = $("#5").val();
+                a6 = $("#6").val();
+                a7 = $("#7").val();
+                a8 = $("#8").val();
+                a9 = $("#9").val();
+                a10 = $("#10").val();
+                a11 = $("#11").val();
+                a12 = $("#12").val();
+                a13 = $("#13").val();
+                a14 = $("#14").val();
+                a15 = $("#15").val();
+                a16 = $("#16").val();
+                var final_time = new Date().getTime();
+                var total_time = (final_time - initial_time)/1000;              
+                $.ajax({
+            
+                    type : "POST",
+                    url : "php/game_ready.php",
+                    data : "a1="+a1+"&a2="+a2+"&a3="+a3+"&a4="+a4+"&a5="+a5+"&a6="+a6+"&a7="+a7+"&a8="+a8+"&a9="+a9+"&a10="+a10+"&a11="+a11+"&a12="+a12+"&a13="+a13+"&a14="+a14+"&a15="+a15+"&a16="+a16+"&time="+total_time+"&money="+(1500-money)+"&seq="+seq.toString(),
+                    success:function(html){
+                        if(html == 'true'){
+                            window.location.href = "index.html";
+                        }
+                    },
+                    beforeSend:function(html){
+                        //  stuff
+                    }
+                })
+
+            })
+            $(".buy").click(function(){
+                var ident = $(this);
+                $("#full_screen_c").css("display","flex");
+                $("#accept_buy").click(function(){
+                    $.ajax({
+                        type : "POST",
+                        url : "php/buy_process.php",
+                        data : "target_id=" + ident.attr("id"),
+                        success:function(html){
+                            money-=100;
+                            ident.removeClass(".buy");
+                            $("#money").html(money);
+                            $("#full_screen_c").css("display","none");
+                        }
+                    })                    
+                })
+                $("#refuse").click(function(){
+                    $("#full_screen_c").css("display","none");
+                })
+
+            })
+        })
+    </script>
+    </body>
+</html>

@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+        <link rel="stylesheet" href="css/elem.css">
+        <style>
+            .navigate{
+                top: 0;
+                width: 100%;
+                position: fixed;
+                display: flex;
+                background-color: #000;
+                z-index: 3;
+            }
+            .navigate .login{
+                text-align: center;
+                justify-content: center;
+            }
+            .navigate .login a{
+                margin: 0 10px;
+                padding: 10px;
+                width: 80px;
+                height: 40px;
+                box-sizing: border-box;	
+                display: inline-block;
+                color: white;
+                text-decoration: none;
+                transition: .2s;
+            }
+            .navigate .login a:hover{
+                background-color: yellow;
+            }
+            .info{
+                width: auto;
+                margin-top: 40px;
+            }
+            .info .banner{
+                width:auto;
+            }
+            .info .banner img{
+                width: 100%;
+                vertical-align: bottom;
+            }
+            
+        </style>
+
+    </head>
+    <body>
+        <div class="navigate">
+            <div class="logo">
+                <a href="#"><img src="https://picsum.photos/80/40/?random=1"></a>
+            </div>
+            <div class="login">
+                <a href="#">登入</a>
+            </div>
+        </div>
+        <div class="info">
+            <div class="banner"><img src="source/banner.png"></div>
+        </div>
+        <div class="backstage">
+            <div class="warp search">
+                <div class="item">
+                    <input type="text" id="id_browser" placeholder="enter student id">
+                    <button id="search">搜尋</button>
+                    <button id="game_data_modify">修改題目數據</button>
+                    <button id="output_data">輸出成CSV檔</button>
+                    <button id="delete_all">刪除所有資料</button>
+                    <span id="output"></span>
+                </div>
+            </div>
+    
+            <div class="result">
+                <hr id="top" />
+                <div class="warp">
+                    <div class="item">
+                        <div id="data_console">
+                        </div>                 
+                    </div>   
+                </div>
+                <hr id="buttom"/>   
+            </div>
+    
+            <div class="warp_r">
+                <div class="row">
+                    <div class="item_r">
+                        <div class="rank" id = "m">
+                            <div class="tool">
+                                <div class="obj"><h1>Name List</h1></div>
+                                <br/>
+                                <br/>                                
+                            </div>
+                        </div>                
+                    </div>          
+                </div>      
+            </div>
+        </div>
+        <div id="full_screen_a" class="full_screen">
+            <div class="check_console">
+                <div class="l"><h1>確定要刪除??</h1></div>
+                <div class="l"><button id="accept_delete">確定</button><button id="refuse" onclick="refuse()">取消</button></div>
+            </div>
+        </div>
+        <div id="full_screen_b" class="full_screen">
+            <div class="check_console_b">
+                <div class="l"><h1>請輸入新數據</h1></div>
+                <div class="l">
+                    <input type="text" placeholder="A-1-1" id = "0" class="input_data">
+                    <input type="text" placeholder="A-1-2" id = "1" class="input_data">
+                    <input type="text" placeholder="A-1-3" id = "2" class="input_data">
+                </div>
+                <div class="l">
+                    <input type="text" placeholder="A-2-1" id = "3" class="input_data">
+                    <input type="text" placeholder="A-2-2" id = "4" class="input_data">
+                    <input type="text" placeholder="A-2-3" id = "5" class="input_data">
+                </div>
+                <div class="l">
+                    <input type="text" placeholder="A-3-1" id = "6" class="input_data">
+                    <input type="text" placeholder="A-3-2" id = "7" class="input_data">
+                    <input type="text" placeholder="A-3-3" id = "8" class="input_data">
+                </div>
+                <div class="l"><button id="accept_change">確定</button><button id="refuse" onclick="refuse_change()">取消</button></div>
+            </div>
+        </div>
+        <script src="js/jquery.min.js"></script>
+        <script>
+            $(document).ready(function(){
+                $("#data_console").html("<li><h4>student ID:</h4> || <h4>Money: </h4><h3>$</h3> || <h4>Time: </h4><h3>s</h3></li>")
+                $("#data_console h4").css("display","inline-block");
+                $("#data_console h3").css("display","inline-block");
+                $("#data_console li").css("margin","0px auto");
+                $("#data_console h4").css("width","200px");
+                $.ajax({
+                    type : "POST",
+                    url : "php/load_student_data.php",
+                    success:function(html){
+                        $("#m").append(html);
+                        $("#m h4").css("display","inline-block");
+                        $("#m h3").css("display","inline-block");
+                        $("#m h4").css("width","200px");
+                    }
+                })
+                $("#search").click(function(){
+                student_id = $("#id_browser").val();
+                $.ajax({
+                    type : "POST",
+                    url : "php/search_student.php",
+                    data : "id="+student_id,
+                    success:function(html){
+                        $("#data_console").html(html);
+                        $("#data_console h4").css("display","inline-block");
+                        $("#data_console h3").css("display","inline-block");
+                        $("#data_console h4").css("width","200px");
+                    }
+                })
+                })
+                $("#id_browser").on("keypress",function(e){
+                    if(e.which==13){
+                        student_id = $("#id_browser").val();
+                        $.ajax({
+                            type : "POST",
+                            url : "php/search_student.php",
+                            data : "id="+student_id,
+                            success:function(html){
+                                $("#data_console").html(html);
+                                $("#data_console h4").css("display","inline-block");
+                                $("#data_console h3").css("display","inline-block");
+                                $("#data_console h4").css("width","200px");
+                            }
+                        })
+                    }
+                })
+                $("#data_console").on("click",".delete",function(event){
+                    $("#output").html("processing...")
+                    $("#full_screen_a").css("display","flex");
+                    $target_name = event.target.id;                    
+                    $("#accept_delete").click(function(){
+                        $.ajax({
+                            type : "POST",
+                            data : "name="+$target_name,
+                            url : "php/delete_stu.php",
+                            success:function(html){
+                                $("#data_console").html(`<li class = "stu"><h4>student ID:</h4> || <h4>Money: </h4><h3>$</h3> || <h4>Time: </h4><h3>s</h3></li>`)
+                                $("#output").html(html)
+                                $("#full_screen_a").css("display","none");
+                            }
+                        })
+                    })
+                    $("#refuse").click(function(){
+                        $("#full_screen_a").css("display","none");
+                    })
+
+
+                })
+                $('#m').on("click",'.delete',function(event){
+                    $("#full_screen_a").css("display","flex");
+                    $("#accept_delete").click(function(){
+                        $.ajax({
+                            type : "POST",
+                            url : "php/delete_stu.php",
+                            data : "name="+event.target.id,
+                            success:function(html){
+                                $(event.target).parent().css("display","none");
+                                $("#full_screen_a").css("display","none");
+                                $("#output").html(html)      
+                            }
+                        })                        
+                    })
+                    $("#refuse").click(function(){
+                        $("#full_screen_a").css("display","none");
+                    })
+
+                })
+                $("#delete_all").click(function(){
+                    $.ajax({
+                        type : "POST",
+                        url : "php/delete_all.php"
+                    })
+                })
+                $("#game_data_modify").click(function(){
+                    $("#full_screen_b").css("display","flex");
+                    $("#accept_change").click(function(){
+                        q0 = $("#0").val();
+                        q1 = $("#1").val();
+                        q2 = $("#2").val();
+                        q3 = $("#3").val();
+                        q4 = $("#4").val();
+                        q5 = $("#5").val();
+                        q6 = $("#6").val();
+                        q7 = $("#7").val();
+                        q8 = $("#8").val();
+                        $.ajax({
+                            type : "POST",
+                            url  : "php/upload_question.php",
+                            data : "q0="+q0+"&q1="+q1+"&q2="+q2+"&q3="+q3+"&q4="+q4+"&q5="+q5+"&q6="+q6+"&q7="+q7+"&q8="+q8,
+                            success:function(html){
+                                $("#full_screen_b").css("display",'none');
+                                $("#output").html(html);
+                            }
+                        })
+                    });
+                    $("#refuse").click(function(){
+                        $("#full_screen_b").css("display",'none');
+                    });
+                })
+                $("#output_data").click(function(){
+                    $.ajax({
+                        type :"POST",
+                        url : "php/output.php",
+                        success:function(html){
+                            $("#output").html(html);
+                        }
+                    })
+                })
+            })
+        </script>
+    </body>
+</html>

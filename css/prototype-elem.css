@@ -1,0 +1,246 @@
+/*reset*/
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+body {
+	line-height: 1;
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+/*class and ids*/
+.navigate{
+	width: 100%;
+	position: fixed;
+	top: 0;
+    display: flex;
+    background-color: #000;
+}
+.navigate .login{
+	text-align: center;
+	justify-content: center;
+}
+.navigate .login a{
+	margin: 0 10px;
+	padding: 10px;
+	width: 80px;
+	height: 40px;
+	box-sizing: border-box;	
+	display: inline-block;
+	color: white;
+	text-decoration: none;
+	transition: .2s;
+}
+.info{
+	width: auto;
+	margin-top: 40px;
+}
+.info .banner{
+	width:auto;
+}
+.info .banner img{
+	width: 100%;
+	vertical-align: bottom;
+}
+.info .warp{
+	background-color: gray;
+	padding: 60px;
+}
+.info .warp .text{
+	padding: 20px;
+	margin-bottom: 40px;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+}
+.info .warp .text,.vid{
+	width: 400px;
+	text-align: center;
+	width: auto;
+	justify-content: center;
+}
+.info .warp .vid video{
+	width: 100%;
+}
+.game .warp{
+	width: auto;
+}
+#money::after{
+	content: '$';
+}
+#gt{
+	text-align: center;
+}
+#gt h3{
+	font-size: 40px;
+}
+.game .row{
+	width: 100%;
+}
+.game .row .table{
+	width: 100%;
+	border-radius: 3%;
+	box-shadow:0 0 10px black;
+}
+.game .row .table .table-row{
+	width: 100%;
+	display: flex;
+}
+.game .row .table .table-row .item{
+	font-size: 1.1em;
+	border-top: 1px solid;
+	border-left: 1px solid;
+	text-align: center;
+	width: 20%;
+	line-height:5em;
+}
+.game .row .table .table-row .t-item{
+	text-align: center;
+	width: 20%;
+	border-top: 1px solid;
+	line-height: 2em;
+}
+.ttr{
+	border-right: 1px solid;		
+	border-top-right-radius: 15%;
+}
+
+.ttl{
+	border-left: 1px solid;	
+	border-top-left-radius: 15%
+}
+.tbl{
+	border-bottom: 1px soild;
+	border-bottom-left-radius: 15%;
+}
+.tbr{
+	border-right: 1px solid;
+	border-bottom: 1px solid;		
+	border-bottom-right-radius: 15%;
+}
+.tb{
+	border-bottom: 1px solid;
+}
+.tr{
+	border-right: 1px solid;
+}
+.ttt{
+	font-size: 40px;
+}
+#tt{
+	width: 60%;
+}
+.buy{
+	box-sizing: border-box;
+	margin: 0 10px 0;
+	height: 3em;
+	width: 87%;
+	border-radius: 15%;
+}
+.buy::after{
+	content: '$';
+}
+.buy:hover{
+	background-color:lightgreen;
+	cursor: pointer;
+}
+.game .row .table .table-row .item .input-bar{
+	width: 80%;
+	line-height: 3em;
+	text-align: center;
+	border: 1px solid;
+	border-color: black;
+}
+.input-bar::placeholder{
+	color: #000;
+}
+.submit{
+	width: 100%;
+	margin: auto;
+	margin-top:20px;
+}
+#submit-btn{
+	width: 100%;
+	height: 3em;
+}
+#s{
+	width: 100%;
+}
+.lb{
+	background-color:lightblue;
+}
+.or{
+	background-color:orange;
+}
+.ye{
+	background-color: yellow;
+}
+.gr{
+	background-color: green;
+}
+
+@media screen and (min-width:768px) {
+	.game{
+		margin: auto;
+		width: auto;
+		justify-content: center;
+	}
+	.navigate
+	{	
+		width: 100%;
+	}
+	.row{
+		display: flex;
+	}
+	.info .warp{
+		display: flex;
+	}
+	.vid{
+		width: 50%;
+	}
+	.text{
+		width: 50%;
+	}
+	.table{
+		margin: 41px;
+	}
+	#ans{
+		width: 50%;
+		margin: auto;
+	}
+}
