@@ -35,4 +35,5 @@
         $row =(intval($target_id[2])-1)*3;
     }
     $retur = $target_arr[$row+intval($target_id[4])-1];
+    if($target_id[0]!='A') $retur = $retur . "%";
     echo $retur;

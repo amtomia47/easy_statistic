@@ -327,27 +327,33 @@
                 })
 
             })
-            $(".buy").click(function(){
-                var ident = $(this);
+            $(".buy").click(function(event){
+                $buy_target = event.target;
                 $("#full_screen_c").css("display","flex");
                 $("#accept_buy").click(function(){
+                    $("#accept_buy").off("click");
+                    $("#refuse").off("click");
+                    $("#full_screen_c").css("display","none");
                     $.ajax({
                         type : "POST",
                         url : "php/buy_process.php",
-                        data : "target_id=" + ident.attr("id"),
+                        data : "target_id=" + $buy_target.id,
                         success:function(html){
-                            money-=100;
-                            ident.removeClass(".buy");
+                            money-= Number($($buy_target).text())
                             $("#money").html(money);
-                            $("#full_screen_c").css("display","none");
+                            $($buy_target).parent().html(html);
+                            seq.push($buy_target.id);
+
                         }
-                    })                    
+                    })
                 })
                 $("#refuse").click(function(){
+                    $("#refuse").off("click");
+                    $("#accept_buy").off("click");
                     $("#full_screen_c").css("display","none");
                 })
-
             })
+
         })
     </script>
     </body>
