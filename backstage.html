@@ -211,9 +211,20 @@
 
                 })
                 $("#delete_all").click(function(){
-                    $.ajax({
-                        type : "POST",
-                        url : "php/delete_all.php"
+                    $("#full_screen_a").css("display","flex");
+                    $("#accept_delete").click(function(){
+                        $("#accept_delete").off("click");
+                        $("#refuse").off("click");
+                        $.ajax({
+                            type : "POST",
+                            url : "php/delete_all.php"
+                        })
+                        $("#full_screen_a").css("display","none");
+                    })
+                    $("#delete").click(function(){
+                        $("#accept_delete").off("click");
+                        $("#refuse").off("click");
+                        $("#full_screen_a").css("display","none");
                     })
                 })
                 $("#game_data_modify").click(function(){
