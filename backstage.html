@@ -41,7 +41,13 @@
                 width: 100%;
                 vertical-align: bottom;
             }
-            
+            #output_data:hover{
+                cursor: pointer;
+            }
+            #output_data{
+                text-decoration: none;
+                color: #000;
+            }
         </style>
 
     </head>
@@ -63,7 +69,7 @@
                     <input type="text" id="id_browser" placeholder="enter student id">
                     <button id="search">搜尋</button>
                     <button id="game_data_modify">修改題目數據</button>
-                    <button id="output_data">輸出成CSV檔</button>
+                    <button><a id="output_data" href="php/成績結算.csv" download="php/成績結算.csv" >輸出成CSV檔</a></button>
                     <button id="delete_all">刪除所有資料</button>
                     <span id="output"></span>
                 </div>
@@ -139,6 +145,13 @@
                         $("#m h4").css("width","200px");
                     }
                 })
+                $.ajax({
+                        type :"POST",
+                        url : "php/output.php",
+                        success:function(html){
+                            $("#output").html(html);
+                        }
+                        })
                 $("#search").click(function(){
                 student_id = $("#id_browser").val();
                 $.ajax({
@@ -150,6 +163,13 @@
                         $("#data_console h4").css("display","inline-block");
                         $("#data_console h3").css("display","inline-block");
                         $("#data_console h4").css("width","200px");
+                        $.ajax({
+                        type :"POST",
+                        url : "php/output.php",
+                        success:function(html){
+                            $("#output").html(html);
+                        }
+                        })
                     }
                 })
                 })
@@ -180,16 +200,23 @@
                             url : "php/delete_stu.php",
                             success:function(html){
                                 $("#data_console").html(`<li class = "stu"><h4>student ID:</h4> || <h4>Money: </h4><h3>$</h3> || <h4>Time: </h4><h3>s</h3></li>`)
-                                $("#output").html(html)
                                 $("#full_screen_a").css("display","none");
+                                $("#data_console h4").css("display","inline-block");
+                                $("#data_console h3").css("display","inline-block");
+                                $("#data_console h4").css("width","200px");
+                                $.ajax({
+                                    type :"POST",
+                                    url : "php/output.php",
+                                    success:function(html){
+                                        $("#output").html(html);
+                                    }
+                                })
                             }
                         })
                     })
                     $("#refuse").click(function(){
                         $("#full_screen_a").css("display","none");
                     })
-
-
                 })
                 $('#m').on("click",'.delete',function(event){
                     $("#full_screen_a").css("display","flex");
@@ -201,9 +228,17 @@
                             success:function(html){
                                 $(event.target).parent().css("display","none");
                                 $("#full_screen_a").css("display","none");
-                                $("#output").html(html)      
+                                $("#output").html(html)
+                                $.ajax({
+                                    type :"POST",
+                                    url : "php/output.php",
+                                    success:function(html){
+                                        $("#output").html(html);
+                                    }
+                                })                                      
                             }
-                        })                        
+                        })
+                     
                     })
                     $("#refuse").click(function(){
                         $("#full_screen_a").css("display","none");
@@ -219,9 +254,16 @@
                             type : "POST",
                             url : "php/delete_all.php"
                         })
+                        $.ajax({
+                        type :"POST",
+                        url : "php/output.php",
+                        success:function(html){
+                            $("#output").html(html);
+                        }
+                    })
                         $("#full_screen_a").css("display","none");
                     })
-                    $("#delete").click(function(){
+                    $("#refuse").click(function(){
                         $("#accept_delete").off("click");
                         $("#refuse").off("click");
                         $("#full_screen_a").css("display","none");
@@ -253,15 +295,7 @@
                         $("#full_screen_b").css("display",'none');
                     });
                 })
-                $("#output_data").click(function(){
-                    $.ajax({
-                        type :"POST",
-                        url : "php/output.php",
-                        success:function(html){
-                            $("#output").html(html);
-                        }
-                    })
-                })
+
             })
         </script>
     </body>
