@@ -20,7 +20,7 @@
             .check_console{
                 position: relative;
                 width: 300px;
-                height: 150px;
+                height: 200px;
                 background-color: #fff;
                 }
                 .check_console .l{
@@ -280,7 +280,28 @@
         <div id="full_screen_c" class="full_screen">
             <div class="check_console">
                 <div class="l"><h1>確定要購買??</h1></div>
+                <div class="l" id="money_remained"></div>
                 <div class="l"><button id="accept_buy">確定</button><button id="refuse">取消</button></div>
+            </div>
+        </div>
+        <div id="full_screen_d" class="full_screen">
+            <div class="check_console">
+                <div class="l"><h1>作答未完成!</h1></div>
+                <div class="l">請完成作答!</div>
+                <div class="l"><button id="close_d">確定</button></div>
+            </div>
+        </div>
+        <div id="full_screen_e" class="full_screen">
+            <div class="check_console">
+                <div class="l">作答錯誤!</div>
+                <div class="l">請重新確認答案!</div>
+                <div class="l"><button id="close_e">確定</button></div>
+            </div>
+        </div>
+        <div id="full_screen_f" class="full_screen">
+            <div class="check_console">
+                <div class="l">確認送出答案?</div>
+                <div class="l"><button id="accept_sub">確定</button><button id="refuse_f">取消</button></div>
             </div>
         </div>
     <script src="js/jquery.min.js"></script>        
@@ -290,46 +311,80 @@
             var money = 1500;
             var seq = []
             const initial_time = new Date().getTime();
-            var game_completed = 'false';
+            var ans_filled = 1;            
             $("#money").html(money);            
             $("#submit-btn").click(function(){
-                a1 = $("#1").val();
-                a2 = $("#2").val();
-                a3 = $("#3").val();
-                a4 = $("#4").val();
-                a5 = $("#5").val();
-                a6 = $("#6").val();
-                a7 = $("#7").val();
-                a8 = $("#8").val();
-                a9 = $("#9").val();
-                a10 = $("#10").val();
-                a11 = $("#11").val();
-                a12 = $("#12").val();
-                a13 = $("#13").val();
-                a14 = $("#14").val();
-                a15 = $("#15").val();
-                a16 = $("#16").val();
-                var final_time = new Date().getTime();
-                var total_time = (final_time - initial_time)/1000;              
-                $.ajax({
-            
-                    type : "POST",
-                    url : "php/game_ready.php",
-                    data : "a1="+a1+"&a2="+a2+"&a3="+a3+"&a4="+a4+"&a5="+a5+"&a6="+a6+"&a7="+a7+"&a8="+a8+"&a9="+a9+"&a10="+a10+"&a11="+a11+"&a12="+a12+"&a13="+a13+"&a14="+a14+"&a15="+a15+"&a16="+a16+"&time="+total_time+"&money="+(1500-money)+"&seq="+seq.toString(),
-                    success:function(html){
-                        if(html == 'true'){
-                            window.location.href = "index.html";
+                ans_filled = 1;
+                $("#full_screen_f").css("display","flex")
+                $("#accept_sub").click(function(){
+                    $("#refuse_f").off("click");
+                    $("#full_screen_f").css("display","none");
+                    for(i=1;i<=16;i++){
+                        if($("#"+i.toString()).val()==""){
+                            ans_filled = 0;
                         }
-                    },
-                    beforeSend:function(html){
-                        //  stuff
                     }
+                    if(ans_filled == 1){
+                    a1 = $("#1").val();
+                    a2 = $("#2").val();
+                    a3 = $("#3").val();
+                    a4 = $("#4").val();
+                    a5 = $("#5").val();
+                    a6 = $("#6").val();
+                    a7 = $("#7").val();
+                    a8 = $("#8").val();
+                    a9 = $("#9").val();
+                    a10 = $("#10").val();
+                    a11 = $("#11").val();
+                    a12 = $("#12").val();
+                    a13 = $("#13").val();
+                    a14 = $("#14").val();
+                    a15 = $("#15").val();
+                    a16 = $("#16").val();
+                    var final_time = new Date().getTime();
+                    var total_time = (final_time - initial_time)/1000;              
+                    $.ajax({
+                
+                        type : "POST",
+                        url : "php/game_ready.php",
+                        data : "a1="+a1+"&a2="+a2+"&a3="+a3+"&a4="+a4+"&a5="+a5+"&a6="+a6+"&a7="+a7+"&a8="+a8+"&a9="+a9+"&a10="+a10+"&a11="+a11+"&a12="+a12+"&a13="+a13+"&a14="+a14+"&a15="+a15+"&a16="+a16+"&time="+total_time+"&money="+(1500-money)+"&seq="+seq.toString(),
+                        success:function(html){
+                            if(html == 'true'){
+                                window.location.href = "index.html";
+                            }
+                            if(html == 'false'){
+                                $("#full_screen_e").css("display","flex")
+                                $("#close_e").click(function(){
+                                    $("close_e").off("click");
+                                    $("#full_screen_e").css("display","none");
+                                })
+                            }
+                        }
+                    })
+                }
+                else if(ans_filled == 0){
+                    $("#full_screen_d").css("display","flex")
+                    $("#close_d").click(function(){
+                        $("#close_d").off("click");
+                        $("#full_screen_d").css("display","none");
+                    })
+                }
+                    $("#accept_sub").off("click");
+                    $("#sub_btn").off("click");   
+                        // unfinished
                 })
-
+                $("#refuse_f").click(function(){
+                    $("#accept_sub").off("click");
+                    $("#full_screen_f").css("display","none"); 
+                    $("#refuse_f").off("click");
+                    $("#sub_btn").off("click");            
+                })
+                
             })
             $(".buy").click(function(event){
                 $buy_target = event.target;
                 $("#full_screen_c").css("display","flex");
+                $("#money_remained").text("您將剩下: "+(money-=Number($($buy_target).text())).toString()+" 元");
                 $("#accept_buy").click(function(){
                     $("#accept_buy").off("click");
                     $("#refuse").off("click");

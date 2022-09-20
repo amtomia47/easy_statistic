@@ -35,7 +35,7 @@
             (int)$aA[$i*4-1] = (int)$tA[$i*3-1] + (int)$tA[$i*3-2] + (int)$tA[$i*3-3];
             (int)$aA[$i+12-1] = (int)$tA[$i-1] + (int)$tA[$i+3-1] + (int)$tA[$i+6-1];
         }
-        $aA[15] = $aA[3]+$aA[7]+$aA[11];
+        (int)$aA[15] = (int)$aA[3]+(int)$aA[7]+(int)$aA[11];
         for($i = 0,$j=0;$i<9;$i++){
             $aA[$i+$j] = (int)$tA[$i];
             if(($i+1)%3==0){
@@ -46,7 +46,7 @@
     }
     $aA = a_ready($aA,$tA);
     $passed = true;
-    for($i=0;$i<15;$i++){
+    for($i=0;$i<16;$i++){
         if($aA[$i] != (int)$ans_arr[$i]){
             $passed = false;
             break;

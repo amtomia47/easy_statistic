@@ -97,6 +97,35 @@
                 }                
             })                
             })
+            $("#student_id_input").keypress(function(event){
+                if(event.which == 13){
+                    student_id =$("#student_id_input").val()
+                    $.ajax({
+                        type : "POST" ,
+                        url : "php/student_initialize.php" ,
+                        data : "student_id=" + student_id,
+                        success:function(html){
+                            if(html=="true"){
+                                $("#log_err").html("<div class= \"err_text\">success</div>");
+                                window.location.href = "game.html";
+                            }
+                            else if(html=="false"){
+                                $("#log_err").html("<div class= \"err_text\">you have already played the game</div>");
+                            }
+                            else if(html == 'teacher'){
+                                $("log_err").html("redirecting to backstage...");
+                                window.location.href = "backstage.html";
+                            }
+                            else {
+                                $("#log_err").html(html)
+                            }
+                        },
+                        beforeSend:function(){
+                            $("#log_err").html("<div class= \"err_text\">loading...</div>");
+                        }                
+                    }) 
+                }
+            })
 
         })
     </script>
