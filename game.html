@@ -347,7 +347,7 @@
                 
                         type : "POST",
                         url : "php/game_ready.php",
-                        data : "a1="+a1+"&a2="+a2+"&a3="+a3+"&a4="+a4+"&a5="+a5+"&a6="+a6+"&a7="+a7+"&a8="+a8+"&a9="+a9+"&a10="+a10+"&a11="+a11+"&a12="+a12+"&a13="+a13+"&a14="+a14+"&a15="+a15+"&a16="+a16+"&time="+total_time+"&money="+(1500-money)+"&seq="+seq.toString(),
+                        data : "a1="+a1+"&a2="+a2+"&a3="+a3+"&a4="+a4+"&a5="+a5+"&a6="+a6+"&a7="+a7+"&a8="+a8+"&a9="+a9+"&a10="+a10+"&a11="+a11+"&a12="+a12+"&a13="+a13+"&a14="+a14+"&a15="+a15+"&a16="+a16+"&time="+total_time+"&money="+(money)+"&seq="+seq.toString(),
                         success:function(html){
                             if(html == 'true'){
                                 window.location.href = "index.html";
@@ -384,7 +384,7 @@
             $(".buy").click(function(event){
                 $buy_target = event.target;
                 $("#full_screen_c").css("display","flex");
-                $("#money_remained").text("您將剩下: "+(money-=Number($($buy_target).text())).toString()+" 元");
+                $("#money_remained").text("您將剩下: "+(money-Number($($buy_target).text())).toString()+" 元");
                 $("#accept_buy").click(function(){
                     $("#accept_buy").off("click");
                     $("#refuse").off("click");
