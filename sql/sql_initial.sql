@@ -2,7 +2,10 @@ CREATE TABLE `student_data`(
     `student_id` VARCHAR(15) PRIMARY KEY ,
     `play_time` INT ,
     `money_spend` INT ,
-    `buy_sequence` VARCHAR(100)
+    `buy_sequence` VARCHAR(210)
+);
+CREATE TABLE `student_count`(
+    `count` INT
 );
 CREATE TABLE `a`(   /*table A buy data*/
     `a` INT,
@@ -54,6 +57,7 @@ CREATE TABLE `d`(   /*table D buy data*/
     `h` FLOAT,
     `i` FLOAT
 );
+INSERT INTO `student_count`(`count`) VALUES(0);
 INSERT INTO `a`(`a`,`b`,`c`,`d`,`e`,`f`,`g`,`h`,`i`) VALUES(100,600,300,100,200,200,300,700,1000);
 INSERT INTO `b`(`a`,`b`,`c`,`d`,`e`,`f`,`g`,`h`,`i`,`j`,`k`,`l`,`m`,`n`,`o`) VALUES(2.68,17.14,8.57,28.57,2.86,5.71,5.71,14.29,8.57,20.00,28.57,57.14,14.29,48.86,42.86);
 INSERT INTO `c`(`a`,`b`,`c`,`d`,`e`,`f`,`g`,`h`,`i`) VALUES(10,60,30,20,40,40,15,35,50);

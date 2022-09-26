@@ -5,6 +5,10 @@
         <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <style>
+            #logo{
+                display: inline-block;
+                height: 80px;
+            }
             .full_screen{
                 z-index: 10;
                 position: fixed;
@@ -20,7 +24,7 @@
             .check_console{
                 position: relative;
                 width: 300px;
-                height: 200px;
+                height: 230px;
                 background-color: #fff;
                 }
                 .check_console .l{
@@ -38,7 +42,7 @@
     <body>
         <div class="navigate">
             <div class="logo">
-                <a href="#"><img src="https://picsum.photos/80/40/?random=1"></a>
+            <img src="source/logo.png" id="logo">
             </div>
             <div class="login">
                 <div id="stu_id"></div>
@@ -301,6 +305,8 @@
         <div id="full_screen_f" class="full_screen">
             <div class="check_console">
                 <div class="l">確認送出答案?</div>
+                <div class="l">將扣除100元</div>
+                <div class="l" id="money_a_s"></div>
                 <div class="l"><button id="accept_sub">確定</button><button id="refuse_f">取消</button></div>
             </div>
         </div>
@@ -314,6 +320,7 @@
             var ans_filled = 1;            
             $("#money").html(money);            
             $("#submit-btn").click(function(){
+                $("#money_a_s").html("您將剩下: "+(money-100).toString());
                 ans_filled = 1;
                 $("#full_screen_f").css("display","flex")
                 $("#accept_sub").click(function(){
@@ -341,10 +348,11 @@
                     a14 = $("#14").val();
                     a15 = $("#15").val();
                     a16 = $("#16").val();
+                    money-=100;
+                    $("#money").html(money);   
                     var final_time = new Date().getTime();
                     var total_time = (final_time - initial_time)/1000;              
                     $.ajax({
-                
                         type : "POST",
                         url : "php/game_ready.php",
                         data : "a1="+a1+"&a2="+a2+"&a3="+a3+"&a4="+a4+"&a5="+a5+"&a6="+a6+"&a7="+a7+"&a8="+a8+"&a9="+a9+"&a10="+a10+"&a11="+a11+"&a12="+a12+"&a13="+a13+"&a14="+a14+"&a15="+a15+"&a16="+a16+"&time="+total_time+"&money="+(money)+"&seq="+seq.toString(),

@@ -25,10 +25,12 @@
     $rB = mysqli_query($mysqli,$qB);
     $rC = mysqli_query($mysqli,$qC);
     $rD = mysqli_query($mysqli,$qD);
+    $S_num = mysqli_query($mysqli,"SELECT * FROM `student_count`");
     $tA = mysqli_fetch_row($rA);
     $tB = mysqli_fetch_row($rB);
     $tC = mysqli_fetch_row($rC);
     $tD = mysqli_fetch_row($rD);
+    $S_val = mysqli_fetch_row($S_num);
     $aA = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
     function a_ready($aA,$tA){ 
         for($i =1;$i<=3;$i++){
@@ -53,7 +55,12 @@
         }
     }
     if($passed){
+        $money+=200;
+        if((int)$S_val[0]<=4){
+            $money += (500 - (int)$S_val[0]*100);  
+        }
         $mysqli->query("INSERT INTO student_data(`student_id`,`play_time`,`money_spend`,`buy_sequence`) VALUES('$stu_id',$time,$money,'$seq')");
+        mysqli_query($mysqli,"UPDATE `student_count` SET `count` = ".(int)$S_val[0]+1);
         echo 'true';
     }
     else{
