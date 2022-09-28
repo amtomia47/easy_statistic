@@ -15,6 +15,10 @@
             top: 0;
             z-index: 3;
         }
+        #logo{
+                display: inline-block;
+                height: 80px;
+            }
         .info{
         	margin-top: 40px;
         }
@@ -53,7 +57,7 @@
 <body>
     <div class="navigate">
         <div class="logo">
-            <a href="#"><img src="https://picsum.photos/80/40/?random=1"></a>
+            <img src="source/logo.png" id="logo">
         </div>
     </div>
     <div class="info">
@@ -98,7 +102,7 @@
                     },
                     beforeSend:function(){
                         $("#log_err").html("<div class= \"err_text\">loading...</div>");
-                    }                
+                    }             
                 })                 
             }
             

@@ -48,16 +48,17 @@
                 text-decoration: none;
                 color: #000;
             }
+            #logo{
+                display: inline-block;
+                height: 80px;
+            }
         </style>
 
     </head>
     <body>
         <div class="navigate">
             <div class="logo">
-                <a href="#"><img src="https://picsum.photos/80/40/?random=1"></a>
-            </div>
-            <div class="login">
-                <a href="#">登入</a>
+                <img src="source/logo.png" id="logo">
             </div>
         </div>
         <div class="info">
@@ -93,11 +94,11 @@
                             <div class="tool">
                                 <div class="obj"><h1>Name List</h1></div>
                                 <br/>
-                                <br/>                                
+                                <br/>
                             </div>
-                        </div>                
-                    </div>          
-                </div>      
+                        </div>         
+                    </div>      
+                </div>
             </div>
         </div>
         <div id="full_screen_a" class="full_screen">
@@ -124,7 +125,7 @@
                     <input type="text" placeholder="A-3-2" id = "7" class="input_data">
                     <input type="text" placeholder="A-3-3" id = "8" class="input_data">
                 </div>
-                <div class="l"><button id="accept_change">確定</button><button id="refuse" onclick="refuse_change()">取消</button></div>
+                <div class="l"><button id="accept_change">確定</button><button id="refuse_change">取消</button></div>
             </div>
         </div>
         <script src="js/jquery.min.js"></script>
@@ -272,6 +273,8 @@
                 $("#game_data_modify").click(function(){
                     $("#full_screen_b").css("display","flex");
                     $("#accept_change").click(function(){
+                        $("#refuse").off("click");
+                        $("#accept_change").off("click");
                         q0 = $("#0").val();
                         q1 = $("#1").val();
                         q2 = $("#2").val();
@@ -291,8 +294,10 @@
                             }
                         })
                     });
-                    $("#refuse").click(function(){
-                        $("#full_screen_b").css("display",'none');
+                    $("#refuse_change").click(function(){
+                        $("#refuse_change").off("click");
+                        $("#accept_change").off("click");                            
+                        $("#full_screen_b").css("display",'none');                  
                     });
                 })
 
