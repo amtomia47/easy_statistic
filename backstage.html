@@ -69,7 +69,9 @@
                 <div class="item">
                     <input type="text" id="id_browser" placeholder="enter student id">
                     <button id="search">搜尋</button>
-                    <button id="game_data_modify">修改題目數據</button>
+                    <input type="number" id="groupe_num" placeholder="enter number of people">
+                    <button id="set_groupe_num">設定允許數目</button>
+                    <button id="game_data_modify">修改題目數據</button>                    
                     <button><a id="output_data" href="php/成績結算.csv" download="php/成績結算.csv" >輸出成CSV檔</a></button>
                     <button id="delete_all">刪除所有資料</button>
                     <span id="output"></span>
@@ -131,6 +133,7 @@
         <script src="js/jquery.min.js"></script>
         <script>
             $(document).ready(function(){
+                $d = $("#groupe_num").val();
                 $("#data_console").html("<li><h4>student ID:</h4> || <h4>Money: </h4><h3>$</h3> || <h4>Time: </h4><h3>s</h3></li>")
                 $("#data_console h4").css("display","inline-block");
                 $("#data_console h3").css("display","inline-block");
@@ -173,6 +176,19 @@
                         })
                     }
                 })
+                })
+                $("#set_groupe_num").click(function(){
+                    $num = $("#groupe_num").val();
+                    if($num != $d) {
+                        $.ajax({
+                            type:"POST",
+                            url : "php/update_num.php",
+                            data : "num="+$num,
+                            success:function(html){
+                                $("#output").html("update completed!");
+                            }
+                        })
+                    }
                 })
                 $("#id_browser").on("keypress",function(e){
                     if(e.which==13){

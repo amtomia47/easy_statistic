@@ -16,7 +16,9 @@
         $time =$_POST["time"];
         $money =$_POST['money'];
         $seq = $_POST['seq'];
+        $fail = $_POST["failed_time"];        
     }
+
     $qA = "SELECT * FROM `a`";
     $qB = "SELECT * FROM `b`";
     $qC = "SELECT * FROM `c`";
@@ -59,7 +61,8 @@
         if((int)$S_val[0]<=4){
             $money += (500 - (int)$S_val[0]*100);  
         }
-        $mysqli->query("INSERT INTO student_data(`student_id`,`play_time`,`money_spend`,`buy_sequence`) VALUES('$stu_id',$time,$money,'$seq')");
+        $mysqli->query("DELETE FROM student_data WHERE `student_data`.`student_id` = '".$stu_id."'");
+        $mysqli->query("INSERT INTO student_data(`student_id`,`play_time`,`money_spend`,`buy_sequence`,`failed_time`) VALUES('$stu_id',$time,$money,'$seq',$fail)");
         mysqli_query($mysqli,"UPDATE `student_count` SET `count` = ".(int)$S_val[0]+1);
         echo 'true';
     }

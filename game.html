@@ -277,6 +277,7 @@
                         </div>
                     </div>
                 </div>
+                <div class="row"><button id="give_up">放棄</button></div>
                 <div class="row" id="s"><div class="submit"><button id="submit-btn">submit the answer</button></div></div>
                 <div id="result"></div>
             </div>
@@ -316,6 +317,7 @@
         $(document).ready(function(){
             var money = 1500;
             var seq = []
+            var failed_time = 0;
             const initial_time = new Date().getTime();
             var ans_filled = 1;
             $("#money").html(money);
@@ -355,12 +357,13 @@
                     $.ajax({
                         type : "POST",
                         url : "php/game_ready.php",
-                        data : "a1="+a1+"&a2="+a2+"&a3="+a3+"&a4="+a4+"&a5="+a5+"&a6="+a6+"&a7="+a7+"&a8="+a8+"&a9="+a9+"&a10="+a10+"&a11="+a11+"&a12="+a12+"&a13="+a13+"&a14="+a14+"&a15="+a15+"&a16="+a16+"&time="+total_time+"&money="+(money)+"&seq="+seq.toString(),
+                        data : "a1="+a1+"&a2="+a2+"&a3="+a3+"&a4="+a4+"&a5="+a5+"&a6="+a6+"&a7="+a7+"&a8="+a8+"&a9="+a9+"&a10="+a10+"&a11="+a11+"&a12="+a12+"&a13="+a13+"&a14="+a14+"&a15="+a15+"&a16="+a16+"&time="+total_time+"&money="+(money)+"&seq="+seq.toString()+"&failed_time="+failed_time,
                         success:function(html){
                             if(html == 'true'){
                                 window.location.href = "index.html";
                             }
                             if(html == 'false'){
+                                failed_time++;
                                 $("#full_screen_e").css("display","flex")
                                 $("#close_e").click(function(){
                                     $("close_e").off("click");
@@ -388,6 +391,18 @@
                     $("#sub_btn").off("click");            
                 })
                 
+            })
+            $("#give_up").click(function(){
+                var final_time = new Date().getTime();
+                var total_time = (final_time - initial_time)/1000; 
+                $.ajax({
+                    type : "POST",
+                    url : "php/give_up.php",
+                    data : "time="+total_time+"&money="+(money)+"&seq="+seq.toString()+"&failed_time="+failed_time,
+                    success : function(html){
+                        window.location.href = "index.html";
+                    }
+                })
             })
             $(".buy").click(function(event){
                 $buy_target = event.target;
