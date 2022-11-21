@@ -31,7 +31,7 @@
         }
         if($passed){
             $_SESSION["student_id"] = $stu_id;
-            $mysqli->query("INSERT INTO student_data(`student_id`,`play_time`,`money_spend`,`buy_sequence`,`failed_time`) VALUES('$stu_id',-1,-1,'',-1)");
+            
             echo 'true';            
         }
         else{

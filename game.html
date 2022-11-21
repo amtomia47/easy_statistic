@@ -315,6 +315,15 @@
     <script>
 
         $(document).ready(function(){
+            $.ajax({
+                type : "POST",
+                url: "php/check_played.php",
+                success: function(html){
+                    if(html=="false"){
+                        window.location.href = "index.html";
+                    }
+                }
+            })
             var money = 1500;
             var seq = []
             var failed_time = 0;
